@@ -1,0 +1,4 @@
+server/node_modules
+dashboard/node_modules
+*/.env
+*/coverage

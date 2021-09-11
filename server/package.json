@@ -1,0 +1,37 @@
+{
+  "name": "perfanalytics-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "lint": "eslint --fix src",
+    "test": "jest --coverage --detectOpenHandles --runInBand",
+    "test:watch": "jest --watch"
+  },
+  "author": "Baran Dasdemir <dasdemirbaran@gmail.com>",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "mongoose": "^6.0.5",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "jest": "^27.1.1",
+    "mongodb-memory-server": "^7.4.0",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.6"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "debug": "true",
+      "version": "4.4.8"
+    }
+  }
+}

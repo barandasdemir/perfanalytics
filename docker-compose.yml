@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./server
+    ports:
+      - 3000:3000
+    env_file:
+      - ./server/.env
+    volumes:
+      - ./server:/usr/src/app
+      - ./server/node_modules:/usr/src/app/node_modules:delegated
