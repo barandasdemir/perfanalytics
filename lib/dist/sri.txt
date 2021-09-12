@@ -1,0 +1,12 @@
+<script
+  src="https://barandasdemir-perfanalytics.herokuapp.com/perfanalytics.js"
+  integrity="sha512-35wNl5IJsj99I24EruFDq1pNK8INRCJObdCEF1IPQbP8yHUjWQxNUFgv6h0qSa2En3Z4xkoId9OnGL6rOgnXwA=="
+  crossorigin="anonymous"
+></script>
+
+<script
+  src="https://barandasdemir-perfanalytics.herokuapp.com/perfanalytics.min.js"
+  integrity="sha512-lZo6eMTpaYyoCV68FbsWrWuVfTNKWyQUatLY2vNKBZY2AmdW4oHIAnXtKozUSXNqjaWAp0O7xU8XbmouFebbxQ=="
+  crossorigin="anonymous"
+></script>
+
