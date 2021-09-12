@@ -35,9 +35,6 @@ jobs:
   deploy: ## <-- this is the new stuff
     needs: build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./server
         
     steps:
       - uses: actions/checkout@v2
@@ -46,3 +43,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API}}
           heroku_app_name: "barandasdemir-perfanalytics"
           heroku_email: "dasdemirbaran@gmail.com"
+          appdir: ./server
