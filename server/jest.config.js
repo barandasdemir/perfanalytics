@@ -4,7 +4,7 @@ const config = {
   testEnvironment: 'node',
   collectCoverage: true,
   collectCoverageFrom: ['<rootDir>/src/**/*.js'],
-  coveragePathIgnorePatterns: ['<rootDir>/src/index.js', '<rootDir>/src/db.js'],
+  coveragePathIgnorePatterns: ['<rootDir>/src/index.js', '<rootDir>/src/db.js', '<rootDir>/src/public'],
   setupFiles: ['dotenv/config'],
   setupFilesAfterEnv: ['<rootDir>/test/setupFile.js'],
   globalSetup: '<rootDir>/test/globalSetup.js',
