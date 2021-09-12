@@ -11,7 +11,6 @@ const schema = new mongoose.Schema(
       {
         name: { type: String, required: true },
         duration: { type: Number, required: true },
-        type: { type: String, required: true },
         size: { type: Number, required: true },
       },
     ],

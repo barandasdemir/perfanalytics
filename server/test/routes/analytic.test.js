@@ -12,7 +12,6 @@ const mockMetricData = {
     {
       name: 'test/file.css',
       duration: 1234,
-      type: 'css',
       size: 123,
     },
   ],
@@ -84,6 +83,66 @@ describe('POST /analytic', () => {
     expect(data).toHaveProperty('analytics');
     expect(data.analytics).toBeInstanceOf(Array);
     expect(data.analytics.length).toBeGreaterThan(0);
+  });
+});
+
+describe('GET /analytic/siteID with start and/or end dates', () => {
+  it('should return one metric for last half-hour', async () => {
+    const response = await supertest(app).get(`/analytic/${siteID}`).expect(200);
+    expect(response.body).toHaveProperty('data');
+
+    const { success, data } = response.body;
+    expect(success).toBe(true);
+    expect(data).toHaveProperty('analytics');
+    expect(data.analytics).toBeInstanceOf(Array);
+    expect(data.analytics).toHaveLength(1);
+  });
+
+  it('should return one metric for starting from an hour ago', async () => {
+    const response = await supertest(app)
+      .get(`/analytic/${siteID}?start=${Date.now() - 60 * 60 * 1000}`)
+      .expect(200);
+    expect(response.body).toHaveProperty('data');
+
+    const { success, data } = response.body;
+    expect(success).toBe(true);
+    expect(data).toHaveProperty('analytics');
+    expect(data.analytics).toBeInstanceOf(Array);
+    expect(data.analytics).toHaveLength(1);
+  });
+
+  it('should return empty array for given empty timespan', async () => {
+    const response = await supertest(app)
+      .get(
+        `/analytic/${siteID}?start=${Date.now() - 60 * 60 * 1000}&end=${
+          Date.now() - 40 * 60 * 1000
+        }`,
+      )
+      .expect(200);
+    expect(response.body).toHaveProperty('data');
+
+    const { success, data } = response.body;
+    expect(success).toBe(true);
+    expect(data).toHaveProperty('analytics');
+    expect(data.analytics).toBeInstanceOf(Array);
+    expect(data.analytics).toHaveLength(0);
+  });
+
+  it('should return empty array for invalid timespan', async () => {
+    const response = await supertest(app)
+      .get(
+        `/analytic/${siteID}?start=${Date.now() + 60 * 60 * 1000}&end=${
+          Date.now() - 40 * 60 * 1000
+        }`,
+      )
+      .expect(200);
+    expect(response.body).toHaveProperty('data');
+
+    const { success, data } = response.body;
+    expect(success).toBe(true);
+    expect(data).toHaveProperty('analytics');
+    expect(data.analytics).toBeInstanceOf(Array);
+    expect(data.analytics).toHaveLength(0);
   });
 });
 
