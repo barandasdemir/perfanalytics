@@ -1,12 +1,12 @@
 const express = require('express');
-const WebsiteModel = require('../model/website');
+const Website = require('../model/website');
 const { websiteExists } = require('../middlewares');
 
 const router = express.Router();
 
 // GET All Websites
 router.get('/', async (req, res) => {
-  const data = await WebsiteModel.find();
+  const data = await Website.find();
   res.json({
     success: true,
     data,
@@ -16,21 +16,20 @@ router.get('/', async (req, res) => {
 // GET Insert new website or return already registered site's info
 router.get('/register', async (req, res) => {
   const {
-    protocol: proto,
     headers: { host },
   } = req;
   const [domain] = host.split(':');
-  const payload = { domain, proto };
+  const payload = { domain };
 
-  const existing = await WebsiteModel.exists(payload);
+  const existing = await Website.exists(payload);
   if (existing) {
-    const [data] = await WebsiteModel.find(payload);
+    const [data] = await Website.find(payload);
     res.json({
       success: true,
       data,
     });
   } else {
-    const model = new WebsiteModel(payload);
+    const model = new Website(payload);
     const data = await model.save();
     res.json({
       success: true,
@@ -42,7 +41,7 @@ router.get('/register', async (req, res) => {
 // DELETE Remove a website
 router.delete('/:id', websiteExists, async (req, res) => {
   const { id: _id } = req.params;
-  await WebsiteModel.deleteOne({ _id });
+  await Website.deleteOne({ _id });
   return res.end();
 });
 

@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
   {
-    proto: { type: String, required: true },
     domain: { type: String, required: true },
     metricCount: { type: Number, default: 0 },
     createdAt: {

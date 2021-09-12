@@ -1,4 +1,5 @@
 const express = require('express');
+const Website = require('../model/website');
 const Metric = require('../model/metric');
 const { websiteExists } = require('../middlewares');
 
@@ -48,6 +49,7 @@ router.post('/:id', websiteExists, async (req, res) => {
   }
 
   await model.save();
+  await Website.findOneAndUpdate({ _id: siteID }, { $inc: { metricCount: 1 } });
 
   const analytics = await Metric.find({
     siteID,

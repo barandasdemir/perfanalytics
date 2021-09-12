@@ -25,7 +25,6 @@ describe('GET /website/register', () => {
     expect(success).toBe(true);
     expect(data).toBeInstanceOf(Object);
     expect(data).toHaveProperty('id');
-    expect(data).toHaveProperty('proto');
     expect(data).toHaveProperty('domain');
     expect(data).toHaveProperty('metricCount');
     siteData = data;
