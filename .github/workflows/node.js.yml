@@ -11,12 +11,10 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./server
-
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
@@ -37,6 +35,10 @@ jobs:
   deploy: ## <-- this is the new stuff
     needs: build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
+        
     steps:
       - uses: actions/checkout@v2
       - uses: AkhileshNS/heroku-deploy@v3.12.12
