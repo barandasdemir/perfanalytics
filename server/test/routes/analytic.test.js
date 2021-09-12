@@ -75,9 +75,15 @@ describe('GET /analytic/someInvalidID', () => {
 
 describe('POST /analytic', () => {
   it("should insert analytic data and increment website's metricCount", async () => {
+    const mockBeacon = JSON.stringify({ ...mockMetricData, siteID });
     const response = await supertest(app)
       .post(`/analytic/${siteID}`)
-      .send(mockMetricData)
+      .send(mockBeacon)
+      .set({
+        'Content-Type': 'text/plain',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
+      })
       .expect(200);
     expect(response.body).toHaveProperty('data');
 
@@ -152,9 +158,15 @@ describe('GET /analytic/siteID with start and/or end dates', () => {
 describe('POST /analytic with corrupt/invalid analytic data', () => {
   it('should return a 400 bad request error', async () => {
     delete mockMetricData.ttfb; // corrupt/invalidate data
+    const mockBeacon = JSON.stringify({ ...mockMetricData, siteID });
     const response = await supertest(app)
       .post(`/analytic/${siteID}`)
-      .send(mockMetricData)
+      .send(mockBeacon)
+      .set({
+        'Content-Type': 'text/plain',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
+      })
       .expect(400);
     expect(response.body).toHaveProperty('error');
 

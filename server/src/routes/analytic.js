@@ -33,9 +33,10 @@ router.get('/:id', websiteExists, async (req, res) => {
   });
 });
 
-router.post('/:id', websiteExists, async (req, res) => {
+router.post('/:id', websiteExists, express.text(), async (req, res) => {
   const { id: siteID } = req.params;
-  const model = new Metric({ ...req.body, siteID });
+  const payload = JSON.parse(req.body);
+  const model = new Metric(payload);
   const invalid = model.validateSync();
 
   if (invalid) {
