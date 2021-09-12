@@ -28,7 +28,10 @@ describe('GET /analytic', () => {
 
 describe('GET /analytic/siteID', () => {
   it("should get website's analytics data", async () => {
-    const createdSite = await supertest(app).get('/website/register').expect(200);
+    const createdSite = await supertest(app)
+      .post('/website/register')
+      .send({ origin: 'https://example.org' })
+      .expect(200);
     expect(createdSite.body).toHaveProperty('data');
     const { id } = createdSite.body.data;
     siteID = id;

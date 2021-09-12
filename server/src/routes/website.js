@@ -14,11 +14,9 @@ router.get('/', async (req, res) => {
 });
 
 // GET Insert new website or return already registered site's info
-router.get('/register', async (req, res) => {
-  const {
-    headers: { host },
-  } = req;
-  const [domain] = host.split(':');
+router.post('/register', async (req, res) => {
+  const { origin } = req.body;
+  const domain = origin.substr(origin.lastIndexOf('/') + 1);
   const payload = { domain };
 
   const existing = await Website.exists(payload);

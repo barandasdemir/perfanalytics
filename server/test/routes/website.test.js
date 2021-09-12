@@ -5,35 +5,35 @@ let siteData = null;
 
 describe('GET /website', () => {
   it('should respond with an empty array', async () => {
-    const response = await supertest(app)
-      .get('/website')
-      .expect(200)
-      .expect('Content-type', /json/);
+    const response = await supertest(app).get('/website').expect(200);
     const { success, data } = response.body;
     expect(success).toBe(true);
     expect(data).toBeInstanceOf(Array);
   });
 });
 
-describe('GET /website/register', () => {
+describe('POST /website/register', () => {
   it('should register and return the website information', async () => {
     const response = await supertest(app)
-      .get('/website/register')
-      .expect(200)
-      .expect('Content-type', /json/);
+      .post('/website/register')
+      .send({ origin: 'https://example.org' })
+      .expect(200);
     const { success, data } = response.body;
     expect(success).toBe(true);
     expect(data).toBeInstanceOf(Object);
     expect(data).toHaveProperty('id');
-    expect(data).toHaveProperty('domain');
+    expect(data).toHaveProperty('domain', 'example.org');
     expect(data).toHaveProperty('metricCount');
     siteData = data;
   });
 });
 
-describe('GET /website/register AGAIN', () => {
+describe('POST /website/register AGAIN', () => {
   it('should return the same website information', async () => {
-    const response = await supertest(app).get('/website/register').expect('Content-type', /json/);
+    const response = await supertest(app)
+      .post('/website/register')
+      .send({ origin: 'https://example.org' })
+      .expect(200);
     const { success, data } = response.body;
     expect(success).toBe(true);
     expect(data).toBeInstanceOf(Object);
