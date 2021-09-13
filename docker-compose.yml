@@ -10,3 +10,11 @@ services:
     volumes:
       - ./server:/usr/src/app
       - ./server/node_modules:/usr/src/app/node_modules:delegated
+
+  dashboard:
+    build: ./dashboard
+    ports:
+      - 5000:3000
+    volumes:
+      - ./dashboard:/usr/src/app
+      - ./dashboard/node_modules:/usr/src/app/node_modules:delegated
