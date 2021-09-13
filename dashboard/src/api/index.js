@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const baseUrl = 'https://barandasdemir-perfanalytics.herokuapp.com/api';
 const defaultOpts = {
   headers: {
     Accept: 'application/json',
@@ -9,7 +10,7 @@ const defaultOpts = {
 
 export async function getWebsites() {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_API_BASE}/website`, defaultOpts);
+    const response = await axios.get(`${baseUrl}/website`, defaultOpts);
     const { success, data } = response.data;
     return success ? data : [];
   } catch (error) {
@@ -28,10 +29,7 @@ export async function getWebsiteAnalytics(
   }
   try {
     const query = `?start=${start}&end=${end}`;
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_BASE}/analytic/${websiteID}${query}`,
-      defaultOpts
-    );
+    const response = await axios.get(`${baseUrl}/analytic/${websiteID}${query}`, defaultOpts);
     const {
       success,
       data: { analytics },
@@ -48,10 +46,7 @@ export async function deleteWebsite(websiteID) {
     return;
   }
   try {
-    const response = await axios.delete(
-      `${process.env.REACT_APP_API_BASE}/website/${websiteID}`,
-      defaultOpts
-    );
+    const response = await axios.delete(`${baseUrl}/website/${websiteID}`, defaultOpts);
     return response.status === 200;
   } catch (error) {
     console.error(`PerfAnalytics Dashboard: Failed to delete website '${websiteID}'.`);
