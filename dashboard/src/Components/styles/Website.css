@@ -1,0 +1,18 @@
+.message-header {
+  display: block;
+  margin-top: 0.2rem;
+  background-color: #20232a;
+}
+
+/* must override */
+.message a:not(.button):not(.tag):not(.dropdown-item) {
+  text-decoration: none !important;
+}
+
+.message-body-content {
+  background-color: #32353d;
+}
+
+.resourceContainer {
+  overflow-y: auto;
+}

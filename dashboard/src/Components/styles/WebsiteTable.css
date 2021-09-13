@@ -1,0 +1,13 @@
+p,abbr {
+  color: white;
+}
+
+.columns.table-header {
+  background-color: #2e333f;
+  margin: 0;
+  border-radius: 10px;
+}
+
+a.button {
+  user-select: none;
+}
