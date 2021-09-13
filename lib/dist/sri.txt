@@ -1,12 +1,12 @@
 <script
   src="https://barandasdemir-perfanalytics.herokuapp.com/perfanalytics.js"
-  integrity="sha512-mQkIi8r/slYR/p+FL7H/Jht5gY33kMprGvYl6vvbjltNhoVkrx/yVqbKjxGbG8clTllXQ97fGI5+nq8vdgLM3Q=="
+  integrity="sha512-1IRKsG6UdeEQ3e38C7sp10M3rAoaReXwQNUJ2ehul4YRjs06kQ/gXuWI14p/6PVFKDaq1zweuwSmIhSxWZzAXg=="
   crossorigin="anonymous"
 ></script>
 
 <script
   src="https://barandasdemir-perfanalytics.herokuapp.com/perfanalytics.min.js"
-  integrity="sha512-oTbs+T11TZ2YT0uI6V1UH8I0Wie1lPp3gUfTydLC1wHmVSA3HSIoODp/JBuSM4YXLgMhAnatnL1tjMuXDnFIvg=="
+  integrity="sha512-t9gDh1+2dLWiSfwbsmnKClRgjMPokRBYnZ++V66TgBAHAow4NCEfJ5J+fVSpDAUgitV7cyZaKw2Gbai3rkUPTw=="
   crossorigin="anonymous"
 ></script>
 
