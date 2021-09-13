@@ -1,9 +1,9 @@
 const supertest = require('supertest');
 const app = require('../src/app');
 
-describe('GET /', () => {
+describe('GET /api', () => {
   it('should respond with message', async () => {
-    const response = await supertest(app).get('/').expect(200);
+    const response = await supertest(app).get('/api').expect(200);
     expect(response.body.message).toBe('PerfAnalytics - 👋🌎🌍🌏');
   });
 });

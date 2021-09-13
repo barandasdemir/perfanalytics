@@ -3,19 +3,19 @@ const app = require('../../src/app');
 
 let siteData = null;
 
-describe('GET /website', () => {
+describe('GET /api/website', () => {
   it('should respond with an empty array', async () => {
-    const response = await supertest(app).get('/website').expect(200);
+    const response = await supertest(app).get('/api/website').expect(200);
     const { success, data } = response.body;
     expect(success).toBe(true);
     expect(data).toBeInstanceOf(Array);
   });
 });
 
-describe('POST /website/register', () => {
+describe('POST /api/website/register', () => {
   it('should register and return the website information', async () => {
     const response = await supertest(app)
-      .post('/website/register')
+      .post('/api/website/register')
       .send({ origin: 'https://example.org' })
       .expect(200);
     const { success, data } = response.body;
@@ -28,10 +28,10 @@ describe('POST /website/register', () => {
   });
 });
 
-describe('POST /website/register AGAIN', () => {
+describe('POST /api/website/register AGAIN', () => {
   it('should return the same website information', async () => {
     const response = await supertest(app)
-      .post('/website/register')
+      .post('/api/website/register')
       .send({ origin: 'https://example.org' })
       .expect(200);
     const { success, data } = response.body;
@@ -41,17 +41,17 @@ describe('POST /website/register AGAIN', () => {
   });
 });
 
-describe('DELETE /website/siteID', () => {
+describe('DELETE /api/website/siteID', () => {
   it('should delete the website', async () => {
-    const response = await supertest(app).delete(`/website/${siteData.id}`).expect(200);
+    const response = await supertest(app).delete(`/api/website/${siteData.id}`).expect(200);
     expect(typeof response.body).toBe('object');
     expect(response.body).toEqual({});
   });
 });
 
-describe('DELETE /website/someNonExistingValidID', () => {
+describe('DELETE /api/website/someNonExistingValidID', () => {
   it('should give a 404 not found error', async () => {
-    const response = await supertest(app).delete(`/website/${siteData.id}`).expect(404);
+    const response = await supertest(app).delete(`/api/website/${siteData.id}`).expect(404);
     expect(response.body).not.toHaveProperty('data');
 
     const { success, error } = response.body;
@@ -62,9 +62,9 @@ describe('DELETE /website/someNonExistingValidID', () => {
   });
 });
 
-describe('DELETE /website/someInvalidID', () => {
+describe('DELETE /api/website/someInvalidID', () => {
   it('should give a 400 bad request error', async () => {
-    const response = await supertest(app).delete('/website/someInvalidID').expect(400);
+    const response = await supertest(app).delete('/api/website/someInvalidID').expect(400);
     expect(response.body).not.toHaveProperty('data');
 
     const { success, error } = response.body;
