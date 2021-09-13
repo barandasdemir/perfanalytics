@@ -59,6 +59,8 @@ jobs:
   build-dashboard:
     runs-on: ubuntu-latest
     needs: [build-api]
+    env:
+      INLINE_RUNTIME_CHUNK: false
     defaults:
       run:
         working-directory: ./dashboard
